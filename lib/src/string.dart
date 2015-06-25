@@ -15,3 +15,4 @@
 library kk4r1m.string;
 
 bool isDigit(String s, [int index = 0]) => (s.codeUnitAt(index) ^ 0x30) <= 9;
+bool isDigitCode(int code) => code ^ 0x30 <= 9;
