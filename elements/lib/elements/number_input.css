@@ -1,0 +1,11 @@
+paper-input {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+paper-input /deep/ #input {
+  text-align: center;
+}
+paper-input /deep/ paper-input-decorator {
+  padding-bottom: 8px;
+  padding-top: 0;
+}

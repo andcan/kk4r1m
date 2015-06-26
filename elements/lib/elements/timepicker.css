@@ -1,0 +1,6 @@
+paper-input {
+  width: 1em;
+}
+paper-input /deep/ #input {
+  text-align: center;
+}
