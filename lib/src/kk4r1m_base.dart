@@ -13,3 +13,39 @@
 /// You should have received a copy of the GNU General Public License
 /// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 library kk4r1m.base;
+
+/// A Pair.
+abstract class Pair<S, T> {
+  /// Returns a [MutablePair] if [immutable] is false, otherwise returns an [ImmutablePair].
+  /// Defaults to a [MutablePair].
+  factory Pair(S first, T second, {immutable: false}) =>
+      immutable ? new ImmutablePair(first, second) : new MutablePair(first, second);
+  /// First element.
+  S get first;
+  /// Second element.
+  T get second;
+}
+
+/// An immutable pair.
+class ImmutablePair<S, T> implements Pair<S, T> {
+  /// Returns an immutable pair.
+  ImmutablePair(this._first, this._second);
+  /// First element.
+  S get first => _first;
+  /// Second element.
+  T get second => _second;
+  /// First element.
+  S _first;
+  /// Second element.
+  T _second;
+}
+
+/// A mutable pair.
+class MutablePair<S, T> implements Pair<S, T> {
+  /// Returns a mutable pair.
+  MutablePair(this.first, this.second);
+  /// First element.
+  S first;
+  /// Second element.
+  T second;
+}
