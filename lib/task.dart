@@ -14,7 +14,23 @@
 /// You should have received a copy of the GNU General Public License
 /// along with kk4r1m.  If not, see <http://www.gnu.org/licenses/>.
 
-library kk4r1m.string;
+library kk4r1m.task;
 
-bool isDigit(String s, [int index = 0]) => (s.codeUnitAt(index) ^ 0x30) <= 9;
-bool isDigitCode(int code) => code ^ 0x30 <= 9;
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:args/args.dart';
+import 'package:hop/hop.dart';
+import 'package:path/path.dart';
+import 'package:persistent/persistent.dart';
+import 'package:yaml/yaml.dart';
+
+part 'src/task/license.dart';
+
+final Task LICENSE_TASK = _license();
+
+void installTasks() {
+  addTask('license', LICENSE_TASK);
+}
+

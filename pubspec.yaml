@@ -1,10 +1,15 @@
 name: kk4r1m
-description: A starting point for Dart libraries or applications.
+#description: A starting point for Dart libraries or applications.
 version: 0.0.1
 author: Andrea Cantafio kk4r.1m@gmail.com
 #homepage:
 environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
+  args: any
+  hop: any
+  path: any
+  persistent: any
+  yaml: any
 dev_dependencies:
   test: '>=0.12.0 <0.13.0'
