@@ -9,7 +9,6 @@ dependencies:
   args: any
   hop: any
   path: any
-  persistent: any
   yaml: any
 dev_dependencies:
   test: '>=0.12.0 <0.13.0'

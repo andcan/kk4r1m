@@ -18,8 +18,7 @@ part of kk4r1m.task;
 
 const String COPYRIGHT = '/// Copyright (C) {{YEAR}}  {{AUTHOR}}';
 
-final PersistentMap<String, String> LICENSE_HEADER =
-    new PersistentMap<String, String>.fromMap(<String, String>{
+final Map<String, String> _LICENSE_HEADER = <String, String>{
   'GPLv3': '''/// This file is part of {{PROJECT_NAME}}.
 ///
 /// {{PROJECT_NAME}} is free software: you can redistribute it and/or modify
@@ -35,12 +34,14 @@ final PersistentMap<String, String> LICENSE_HEADER =
 /// You should have received a copy of the GNU General Public License
 /// along with {{PROJECT_NAME}}.  If not, see <http://www.gnu.org/licenses/>.
 '''
-});
+};
+
+final UnmodifiableMapView<String, String> LICENSE_HEADER = new UnmodifiableMapView<String, String>(_LICENSE_HEADER);
 
 /// Contains license's urls.
-final PersistentMap<String, String> LICENSE_URL =
-    new PersistentMap<String, String>.fromMap(
-        <String, String>{'GPLv3': 'https://www.gnu.org/licenses/gpl.txt'});
+final Map<String, String> _LICENSE_URL = <String, String>{'GPLv3': 'https://www.gnu.org/licenses/gpl.txt'};
+
+final UnmodifiableMapView<String, String> LICENSE_URL = new UnmodifiableMapView<String, String>(_LICENSE_URL);
 
 Future _addHeader(
     TaskContext ctx, Directory dir, String header, RegExp regexp) async {
@@ -95,10 +96,10 @@ Task _license() {
           case FileSystemEntityType.FILE:
             // Fetching LICENSE
             final resp = await (await new HttpClient()
-                .getUrl(Uri.parse(LICENSE_URL[license]))).close();
+                .getUrl(Uri.parse(_LICENSE_URL[license]))).close();
             if (HttpStatus.OK != resp.statusCode) {
               ctx.fail(
-                  'Unable to get license from ${LICENSE_URL[license]}: status code is ${resp.statusCode}');
+                  'Unable to get license from ${_LICENSE_URL[license]}: status code is ${resp.statusCode}');
               return;
             }
             final buf = new StringBuffer();
@@ -115,7 +116,7 @@ Task _license() {
                 .replaceFirst('{{AUTHOR}}', pubspec['author'])
                 .replaceFirst('{{YEAR}}', args['year']))
               ..write('\n')
-              ..write(LICENSE_HEADER[license].replaceAll(
+              ..write(_LICENSE_HEADER[license].replaceAll(
                   '{{PROJECT_NAME}}', pubspec['name']))
               ..write('\n');
             final regexp = new RegExp(args['match']);
